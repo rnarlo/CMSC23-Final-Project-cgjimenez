@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "19900764810",
+    "project_id": "cmsc23-project-cgjimenez",
+    "storage_bucket": "cmsc23-project-cgjimenez.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19900764810:android:7dae3c2257a64cf0a1d373",
+        "android_client_info": {
+          "package_name": "com.example.cmsc23_project_cgjimenez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19900764810-sbmltek8u92ucdblh6donhbrd5oij9k1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIKyffz1fJkW6qkAChKIMhlUaRK9N7VUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19900764810-sbmltek8u92ucdblh6donhbrd5oij9k1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "19900764810-o3s3jdb26eojbkjnce3nvaa12pf930g8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cmsc23ProjectCgjimenez"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
