@@ -11,10 +11,8 @@ class FirebaseAuthAPI {
   }
 
   void signIn(String email, String password) async {
-    UserCredential credential;
     try {
-      final credential = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         //possible to return something more useful than just print an error message to improve UI/UX

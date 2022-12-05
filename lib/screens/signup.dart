@@ -74,7 +74,7 @@ class _SignupPageState extends State<SignupPage> {
           labelText: 'E-mail Address', icon: Icon(Icons.email_outlined)),
     );
 
-    final password = TextField(
+    final password = TextFormField(
       controller: passwordController,
       obscureText: true,
       decoration: const InputDecoration(
@@ -106,7 +106,7 @@ class _SignupPageState extends State<SignupPage> {
         icon: Icon(Icons.calendar_today),
       ),
       validator: (value) {
-        if (value!.isEmpty) return "Please enter a valid date!";
+        if (value!.isEmpty) return "Please enter a date!";
         return null;
       },
     ));
@@ -118,10 +118,6 @@ class _SignupPageState extends State<SignupPage> {
         hintText: "Tell me about yourself!",
         icon: Icon(Icons.question_mark_outlined),
       ),
-      validator: (value) {
-        if (value!.isEmpty) return "Please enter a valid date!";
-        return null;
-      },
     );
 
     final SignupButton = Padding(

@@ -5,8 +5,7 @@ import 'package:cmsc23_project_cgjimenez/providers/todo_provider.dart';
 
 class TodoModal extends StatelessWidget {
   String type;
-  // int todoIndex;
-  TextEditingController _formFieldController = TextEditingController();
+  final TextEditingController _formFieldController = TextEditingController();
 
   TodoModal({
     super.key,
