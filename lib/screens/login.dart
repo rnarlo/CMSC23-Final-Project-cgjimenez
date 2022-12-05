@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final loginFields = Container(
-      margin: const EdgeInsets.symmetric(horizontal: 750),
+      margin: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
         children: [
           email,

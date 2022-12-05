@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cmsc23_project_cgjimenez/providers/auth_provider.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -10,6 +9,25 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  TextEditingController birthdayController = TextEditingController();
+  DateTime dateSelected = DateTime.now();
+
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: dateSelected,
+        firstDate: DateTime(2019, 8),
+        lastDate: DateTime(2100));
+    if (picked != null && picked != dateSelected) {
+      setState(() {
+        dateSelected = picked;
+        var date =
+            "${picked.toLocal().day}/${picked.toLocal().month}/${picked.toLocal().year}";
+        birthdayController.text = date;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> firstnameKey = GlobalKey<FormState>();
@@ -83,6 +101,21 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
 
+    final birthday = AbsorbPointer(
+        child: GestureDetector(
+            onTap: () => _selectDate(context),
+            child: TextFormField(
+              controller: birthdayController,
+              decoration: const InputDecoration(
+                labelText: "Birthday",
+                icon: Icon(Icons.calendar_today),
+              ),
+              validator: (value) {
+                if (value!.isEmpty) return "Please enter a date for your task";
+                return null;
+              },
+            )));
+
     final SignupButton = Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
@@ -99,7 +132,8 @@ class _SignupPageState extends State<SignupPage> {
               firstnameController.text,
               lastnameController.text,
               emailController.text,
-              passwordController.text);
+              passwordController.text,
+              addressController.text);
           Navigator.pop(context);
           // }
         },
@@ -124,7 +158,7 @@ class _SignupPageState extends State<SignupPage> {
 
     final signupFields = SingleChildScrollView(
         child: Container(
-      margin: const EdgeInsets.symmetric(horizontal: 750),
+      margin: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
         children: [
           firstname,
@@ -137,12 +171,7 @@ class _SignupPageState extends State<SignupPage> {
           const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
           address,
           const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-          const Text(
-            "Birthday",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
-          ),
-          SfDateRangePicker(),
+          birthday,
           const Padding(padding: EdgeInsets.symmetric(vertical: 12)),
           SignupButton,
           backButton
