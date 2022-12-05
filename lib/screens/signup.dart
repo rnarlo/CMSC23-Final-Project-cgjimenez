@@ -9,15 +9,23 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final GlobalKey<FormState> firstnameKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> lastnameKey = GlobalKey<FormState>();
+  TextEditingController firstnameController = TextEditingController();
+  TextEditingController lastnameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
+  TextEditingController bioController = TextEditingController();
   DateTime dateSelected = DateTime.now();
 
-  _selectDate(BuildContext context) async {
+  selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: dateSelected,
-        firstDate: DateTime(2019, 8),
-        lastDate: DateTime(2100));
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now());
     if (picked != null && picked != dateSelected) {
       setState(() {
         dateSelected = picked;
@@ -30,14 +38,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> firstnameKey = GlobalKey<FormState>();
-    final GlobalKey<FormState> lastnameKey = GlobalKey<FormState>();
-    TextEditingController firstnameController = TextEditingController();
-    TextEditingController lastnameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController addressController = TextEditingController();
-
     final firstname = TextFormField(
       key: firstnameKey,
       controller: firstnameController,
@@ -71,18 +71,16 @@ class _SignupPageState extends State<SignupPage> {
     final email = TextField(
       controller: emailController,
       decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'E-mail Address',
-      ),
+          labelText: 'E-mail Address', icon: Icon(Icons.email_outlined)),
     );
 
     final password = TextField(
       controller: passwordController,
       obscureText: true,
       decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Password',
-      ),
+          labelText: 'Password',
+          hintText: 'Make it secure!',
+          icon: Icon(Icons.password)),
     );
 
     final signupIcon = SizedBox(
@@ -96,25 +94,35 @@ class _SignupPageState extends State<SignupPage> {
     final address = TextField(
       controller: addressController,
       decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Address',
-      ),
+          labelText: 'Address', icon: Icon(Icons.location_city)),
     );
 
-    final birthday = AbsorbPointer(
-        child: GestureDetector(
-            onTap: () => _selectDate(context),
-            child: TextFormField(
-              controller: birthdayController,
-              decoration: const InputDecoration(
-                labelText: "Birthday",
-                icon: Icon(Icons.calendar_today),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) return "Please enter a date for your task";
-                return null;
-              },
-            )));
+    final birthday = GestureDetector(
+        child: TextFormField(
+      onTap: () => selectDate(context),
+      controller: birthdayController,
+      decoration: const InputDecoration(
+        labelText: "Birthday",
+        icon: Icon(Icons.calendar_today),
+      ),
+      validator: (value) {
+        if (value!.isEmpty) return "Please enter a valid date!";
+        return null;
+      },
+    ));
+
+    final bio = TextFormField(
+      controller: bioController,
+      decoration: const InputDecoration(
+        labelText: "Bio",
+        hintText: "Tell me about yourself!",
+        icon: Icon(Icons.question_mark_outlined),
+      ),
+      validator: (value) {
+        if (value!.isEmpty) return "Please enter a valid date!";
+        return null;
+      },
+    );
 
     final SignupButton = Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -133,7 +141,9 @@ class _SignupPageState extends State<SignupPage> {
               lastnameController.text,
               emailController.text,
               passwordController.text,
-              addressController.text);
+              addressController.text,
+              birthdayController.text,
+              bioController.text);
           Navigator.pop(context);
           // }
         },
@@ -158,13 +168,13 @@ class _SignupPageState extends State<SignupPage> {
 
     final signupFields = SingleChildScrollView(
         child: Container(
-      margin: const EdgeInsets.symmetric(horizontal: 0),
+      margin: const EdgeInsets.symmetric(horizontal: 300),
       child: Column(
         children: [
           firstname,
           const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
           lastname,
-          const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
           email,
           const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
           password,
@@ -172,6 +182,8 @@ class _SignupPageState extends State<SignupPage> {
           address,
           const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
           birthday,
+          const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          bio,
           const Padding(padding: EdgeInsets.symmetric(vertical: 12)),
           SignupButton,
           backButton

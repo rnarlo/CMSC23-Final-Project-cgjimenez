@@ -33,7 +33,8 @@ class AuthProvider with ChangeNotifier {
   }
 
   void signUp(String firstname, String lastname, String email, String password,
-      String address) {
-    authService.signUp(email, password, firstname, lastname, address);
+      String address, String birthday, String bio) {
+    authService.signUp(
+        email, password, firstname, lastname, address, birthday, bio);
   }
 }

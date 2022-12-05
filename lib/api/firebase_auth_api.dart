@@ -30,7 +30,7 @@ class FirebaseAuthAPI {
   }
 
   void signUp(String email, String password, String firstname, String lastname,
-      String address) async {
+      String address, String birthday, String bio) async {
     UserCredential credential;
     try {
       credential = await auth.createUserWithEmailAndPassword(
@@ -38,8 +38,8 @@ class FirebaseAuthAPI {
         password: password,
       );
       if (credential.user != null) {
-        saveUserToFirestore(
-            credential.user?.uid, email, firstname, lastname, address);
+        saveUserToFirestore(credential.user?.uid, email, firstname, lastname,
+            address, birthday, bio);
       }
     } on FirebaseAuthException catch (e) {
       //possible to return something more useful than just print an error message to improve UI/UX
@@ -54,7 +54,7 @@ class FirebaseAuthAPI {
   }
 
   void saveUserToFirestore(String? uid, String email, String firstname,
-      String lastname, String address) async {
+      String lastname, String address, String birthday, String bio) async {
     try {
       print(firstname);
       print(lastname);
@@ -62,7 +62,9 @@ class FirebaseAuthAPI {
         "firstname": firstname,
         "lastname": lastname,
         "email": email,
-        "address": address
+        "address": address,
+        "birthday": birthday,
+        "bio": bio
       });
     } on FirebaseException catch (e) {
       print(e.message);
