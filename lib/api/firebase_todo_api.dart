@@ -18,6 +18,26 @@ class FirebaseTodoAPI {
     return db.collection("todos").snapshots();
   }
 
+  Future<String> toggleStatus(String? id, bool status) async {
+    try {
+      await db.collection("todos").doc(id).update({"completed": status});
+
+      return "Successfully toggled status!";
+    } on FirebaseException catch (e) {
+      return "Failed with error '${e.code}: ${e.message}";
+    }
+  }
+
+  Future<String> editTodo(String? id, String? message) async {
+    try {
+      await db.collection("todos").doc(id).update({"title": message});
+
+      return "Successfully edited todo!";
+    } on FirebaseException catch (e) {
+      return "Failed with error '${e.code}: ${e.message}";
+    }
+  }
+
   Future<String> deleteTodo(String? id) async {
     try {
       await db.collection("todos").doc(id).delete();

@@ -56,8 +56,6 @@ class FirebaseAuthAPI {
   void saveUserToFirestore(String? uid, String email, String firstname,
       String lastname, String address, String birthday, String bio) async {
     try {
-      print(firstname);
-      print(lastname);
       await db.collection("users").doc(uid).set({
         "firstname": firstname,
         "lastname": lastname,

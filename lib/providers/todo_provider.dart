@@ -38,9 +38,10 @@ class TodoListProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void editTodo(int index, String newTitle) {
-    // _todoList[index].title = newTitle;
-    print("Edit");
+  void editTodo(String newTitle) async {
+    String message =
+        await firebaseService.editTodo(_selectedTodo!.id, newTitle);
+    print(message);
     notifyListeners();
   }
 
@@ -50,9 +51,10 @@ class TodoListProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleStatus(int index, bool status) {
-    // _todoList[index].completed = status;
-    print("Toggle Status");
+  void toggleStatus(bool status) async {
+    String message =
+        await firebaseService.toggleStatus(_selectedTodo!.id, status);
+    print(message);
     notifyListeners();
   }
 }

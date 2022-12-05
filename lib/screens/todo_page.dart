@@ -24,6 +24,7 @@ class _TodoPageState extends State<TodoPage> {
           child: ListView(padding: EdgeInsets.zero, children: [
         ListTile(
           title: const Text('Logout'),
+          trailing: const Icon(Icons.logout),
           onTap: () {
             context.read<AuthProvider>().signOut();
             Navigator.pop(context);
@@ -31,7 +32,8 @@ class _TodoPageState extends State<TodoPage> {
         ),
       ])),
       appBar: AppBar(
-        title: Text("Todo"),
+        title: Text("Todo List"),
+        backgroundColor: const Color.fromARGB(255, 67, 134, 221),
       ),
       body: StreamBuilder(
         stream: todosStream,
@@ -65,7 +67,7 @@ class _TodoPageState extends State<TodoPage> {
                       SnackBar(content: Text('${todo.title} dismissed')));
                 },
                 background: Container(
-                  color: Colors.red,
+                  color: Color.fromARGB(255, 184, 59, 50),
                   child: const Icon(Icons.delete),
                 ),
                 child: ListTile(
@@ -73,9 +75,8 @@ class _TodoPageState extends State<TodoPage> {
                   leading: Checkbox(
                     value: todo.completed,
                     onChanged: (bool? value) {
-                      context
-                          .read<TodoListProvider>()
-                          .toggleStatus(index, value!);
+                      context.read<TodoListProvider>().changeSelectedTodo(todo);
+                      context.read<TodoListProvider>().toggleStatus(value!);
                     },
                   ),
                   trailing: Row(
@@ -83,13 +84,15 @@ class _TodoPageState extends State<TodoPage> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (BuildContext context) => TodoModal(
-                          //     type: 'Edit',
-                          //     todoIndex: index,
-                          //   ),
-                          // );
+                          context
+                              .read<TodoListProvider>()
+                              .changeSelectedTodo(todo);
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => TodoModal(
+                              type: 'Edit',
+                            ),
+                          );
                         },
                         icon: const Icon(Icons.create_outlined),
                       ),

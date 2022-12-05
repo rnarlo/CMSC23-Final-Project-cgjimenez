@@ -17,11 +17,11 @@ class TodoModal extends StatelessWidget {
   Text _buildTitle() {
     switch (type) {
       case 'Add':
-        return const Text("Add new todo");
+        return const Text("Add New Todo");
       case 'Edit':
-        return const Text("Edit todo");
+        return const Text("Edit Todo");
       case 'Delete':
-        return const Text("Delete todo");
+        return const Text("Delete Todo");
       default:
         return const Text("");
     }
@@ -71,16 +71,16 @@ class TodoModal extends StatelessWidget {
               Navigator.of(context).pop();
               break;
             }
-          // case 'Edit':
-          //   {
-          //     context
-          //         .read<TodoListProvider>()
-          //         .editTodo(todoIndex, _formFieldController.text);
+          case 'Edit':
+            {
+              context
+                  .read<TodoListProvider>()
+                  .editTodo(_formFieldController.text);
 
-          //     // Remove dialog after editing
-          //     Navigator.of(context).pop();
-          //     break;
-          //   }
+              // Remove dialog after editing
+              Navigator.of(context).pop();
+              break;
+            }
           case 'Delete':
             {
               context.read<TodoListProvider>().deleteTodo();
