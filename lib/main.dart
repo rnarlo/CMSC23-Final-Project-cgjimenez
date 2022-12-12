@@ -4,6 +4,7 @@ import 'package:cmsc23_project_cgjimenez/providers/todo_provider.dart';
 import 'package:cmsc23_project_cgjimenez/providers/auth_provider.dart';
 import 'package:cmsc23_project_cgjimenez/screens/todo_page.dart';
 import 'package:cmsc23_project_cgjimenez/screens/login.dart';
+import 'package:cmsc23_project_cgjimenez/screens/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -34,7 +35,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Todo List',
       initialRoute: '/',
-      routes: {'/': (context) => const AuthWrapper()},
+      routes: {
+        '/': (context) => const AuthWrapper(),
+        '/profile': (context) => const ProfilePage()
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

@@ -20,11 +20,18 @@ class _TodoPageState extends State<TodoPage> {
     // access the list of todos in the provider
     Stream<QuerySnapshot> todosStream = context.watch<TodoListProvider>().todos;
     final FirebaseAuth auth = FirebaseAuth.instance;
-    List<Todo?> userTodos = [];
+    List<Todo?> _userTodos = [];
 
     return Scaffold(
       drawer: Drawer(
           child: ListView(padding: EdgeInsets.zero, children: [
+        ListTile(
+          title: const Text('View Profile'),
+          trailing: const Icon(Icons.person),
+          onTap: () {
+            Navigator.pushNamed(context, '/profile');
+          },
+        ),
         ListTile(
           title: const Text('Logout'),
           trailing: const Icon(Icons.logout),
@@ -52,26 +59,26 @@ class _TodoPageState extends State<TodoPage> {
           }
 
           if (snapshot.hasData) {
-            userTodos.clear();
+            _userTodos.clear();
             for (int i = 0; i < snapshot.data!.docs.length; i++) {
               Todo todo = Todo.fromJson(
                   snapshot.data?.docs[i].data() as Map<String, dynamic>);
               if (todo.userId == auth.currentUser!.uid) {
-                userTodos.add(todo);
+                _userTodos.add(todo);
               }
             }
           }
 
-          if (userTodos.isEmpty) {
+          if (_userTodos.isEmpty) {
             return const Center(
               child: Text("No Todos Found"),
             );
           }
 
           return ListView.builder(
-            itemCount: userTodos.length,
+            itemCount: _userTodos.length,
             itemBuilder: ((context, index) {
-              Todo? todo = userTodos[index];
+              Todo? todo = _userTodos[index];
               return Dismissible(
                 key: Key(todo!.id.toString()),
                 onDismissed: (direction) {
