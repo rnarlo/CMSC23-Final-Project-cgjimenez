@@ -11,6 +11,11 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   final GlobalKey<FormState> firstnameKey = GlobalKey<FormState>();
   final GlobalKey<FormState> lastnameKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> emailKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> passKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> locKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> bdayKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> bioKey = GlobalKey<FormState>();
   TextEditingController firstnameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -38,50 +43,68 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final firstname = TextFormField(
-      key: firstnameKey,
-      controller: firstnameController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'First Name',
-      ),
-      // validator: (value) {
-      //   if (value == null || value.isEmpty) {
-      //     return 'This field cannot be empty!';
-      //   }
-      //   return null;
-      // },
-    );
+    final firstname = Form(
+        key: firstnameKey,
+        child: TextFormField(
+          controller: firstnameController,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'First Name',
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field cannot be empty!';
+            }
+            return null;
+          },
+        ));
 
-    final lastname = TextFormField(
-      key: lastnameKey,
-      controller: lastnameController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Last Name',
-      ),
-      // validator: (value) {
-      //   if (value == null || value.isEmpty) {
-      //     return 'This field cannot be empty!';
-      //   }
-      //   return null;
-      // },
-    );
+    final lastname = Form(
+        key: lastnameKey,
+        child: TextFormField(
+          controller: lastnameController,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Last Name',
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field cannot be empty!';
+            }
+            return null;
+          },
+        ));
 
-    final email = TextField(
-      controller: emailController,
-      decoration: const InputDecoration(
-          labelText: 'E-mail Address', icon: Icon(Icons.email_outlined)),
-    );
+    final email = Form(
+        key: emailKey,
+        child: TextFormField(
+          controller: emailController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field cannot be empty!';
+            }
+            return null;
+          },
+          decoration: const InputDecoration(
+              labelText: 'E-mail Address', icon: Icon(Icons.email_outlined)),
+        ));
 
-    final password = TextFormField(
-      controller: passwordController,
-      obscureText: true,
-      decoration: const InputDecoration(
-          labelText: 'Password',
-          hintText: 'Make it secure!',
-          icon: Icon(Icons.password)),
-    );
+    final password = Form(
+        key: passKey,
+        child: TextFormField(
+          controller: passwordController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field cannot be empty!';
+            }
+            return null;
+          },
+          obscureText: true,
+          decoration: const InputDecoration(
+              labelText: 'Password',
+              hintText: 'Make it secure!',
+              icon: Icon(Icons.password)),
+        ));
 
     final signupIcon = SizedBox(
       height: 50,
@@ -91,34 +114,54 @@ class _SignupPageState extends State<SignupPage> {
       ]),
     );
 
-    final address = TextField(
-      controller: addressController,
-      decoration: const InputDecoration(
-          labelText: 'Address', icon: Icon(Icons.location_city)),
-    );
+    final address = Form(
+        key: locKey,
+        child: TextFormField(
+          controller: addressController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field cannot be empty!';
+            }
+            return null;
+          },
+          decoration: const InputDecoration(
+              labelText: 'Address', icon: Icon(Icons.location_city)),
+        ));
 
     final birthday = GestureDetector(
-        child: TextFormField(
-      onTap: () => selectDate(context),
-      controller: birthdayController,
-      decoration: const InputDecoration(
-        labelText: "Birthday",
-        icon: Icon(Icons.calendar_today),
-      ),
-      validator: (value) {
-        if (value!.isEmpty) return "Please enter a date!";
-        return null;
-      },
-    ));
+        child: Form(
+            key: bdayKey,
+            child: TextFormField(
+              onTap: () => selectDate(context),
+              controller: birthdayController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a date!!';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                labelText: "Birthday",
+                icon: Icon(Icons.calendar_today),
+              ),
+            )));
 
-    final bio = TextFormField(
-      controller: bioController,
-      decoration: const InputDecoration(
-        labelText: "Bio",
-        hintText: "Tell me about yourself!",
-        icon: Icon(Icons.question_mark_outlined),
-      ),
-    );
+    final bio = Form(
+        key: bioKey,
+        child: TextFormField(
+          controller: bioController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field cannot be empty!';
+            }
+            return null;
+          },
+          decoration: const InputDecoration(
+            labelText: "Bio",
+            hintText: "Tell me about yourself!",
+            icon: Icon(Icons.question_mark_outlined),
+          ),
+        ));
 
     final SignupButton = Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -130,18 +173,23 @@ class _SignupPageState extends State<SignupPage> {
             textStyle:
                 const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         onPressed: () {
-          // if (firstnameKey.currentState!.validate() &
-          //     lastnameKey.currentState!.validate()) {
-          context.read<AuthProvider>().signUp(
-              firstnameController.text,
-              lastnameController.text,
-              emailController.text,
-              passwordController.text,
-              addressController.text,
-              birthdayController.text,
-              bioController.text);
-          Navigator.pop(context);
-          // }
+          if (firstnameKey.currentState!.validate() ||
+              lastnameKey.currentState!.validate() ||
+              emailKey.currentState!.validate() ||
+              passKey.currentState!.validate() ||
+              locKey.currentState!.validate() ||
+              bdayKey.currentState!.validate() ||
+              bioKey.currentState!.validate()) {
+            context.read<AuthProvider>().signUp(
+                firstnameController.text,
+                lastnameController.text,
+                emailController.text,
+                passwordController.text,
+                addressController.text,
+                birthdayController.text,
+                bioController.text);
+            Navigator.pop(context);
+          }
         },
         child: const Text('Sign up', style: TextStyle(color: Colors.white)),
       ),

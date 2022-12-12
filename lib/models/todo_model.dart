@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Todo {
-  final int userId;
+  final String userId;
   String? id;
   String title;
   bool completed;

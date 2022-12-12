@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SimpleTodo',
+      title: 'Todo List',
       initialRoute: '/',
       routes: {'/': (context) => const AuthWrapper()},
       theme: ThemeData(

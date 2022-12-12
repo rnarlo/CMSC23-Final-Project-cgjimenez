@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cmsc23_project_cgjimenez/models/todo_model.dart';
 import 'package:cmsc23_project_cgjimenez/providers/todo_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TodoModal extends StatelessWidget {
   String type;
   final TextEditingController _formFieldController = TextEditingController();
+  static final FirebaseAuth auth = FirebaseAuth.instance;
 
   TodoModal({
     super.key,
@@ -44,7 +46,6 @@ class TodoModal extends StatelessWidget {
           controller: _formFieldController,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            // hintText: todoIndex != -1 ? todoItems[todoIndex].title : '',
           ),
         );
     }
@@ -60,7 +61,7 @@ class TodoModal extends StatelessWidget {
             {
               // Instantiate a todo objeect to be inserted, default userID will be 1, the id will be the next id in the list
               Todo temp = Todo(
-                  userId: 1,
+                  userId: auth.currentUser!.uid,
                   completed: false,
                   title: _formFieldController.text);
 

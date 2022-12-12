@@ -5,6 +5,7 @@ import 'package:cmsc23_project_cgjimenez/providers/todo_provider.dart';
 import 'package:cmsc23_project_cgjimenez/providers/auth_provider.dart';
 import 'package:cmsc23_project_cgjimenez/screens/modal_todo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -18,6 +19,8 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     // access the list of todos in the provider
     Stream<QuerySnapshot> todosStream = context.watch<TodoListProvider>().todos;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    List<Todo?> userTodos = [];
 
     return Scaffold(
       drawer: Drawer(
@@ -43,22 +46,34 @@ class _TodoPageState extends State<TodoPage> {
               child: Text("Error encountered! ${snapshot.error}"),
             );
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (!snapshot.hasData) {
-            return Center(
+          }
+
+          if (snapshot.hasData) {
+            userTodos.clear();
+            for (int i = 0; i < snapshot.data!.docs.length; i++) {
+              Todo todo = Todo.fromJson(
+                  snapshot.data?.docs[i].data() as Map<String, dynamic>);
+              if (todo.userId == auth.currentUser!.uid) {
+                userTodos.add(todo);
+              }
+            }
+          }
+
+          if (userTodos.isEmpty) {
+            return const Center(
               child: Text("No Todos Found"),
             );
           }
 
           return ListView.builder(
-            itemCount: snapshot.data?.docs.length,
+            itemCount: userTodos.length,
             itemBuilder: ((context, index) {
-              Todo todo = Todo.fromJson(
-                  snapshot.data?.docs[index].data() as Map<String, dynamic>);
+              Todo? todo = userTodos[index];
               return Dismissible(
-                key: Key(todo.id.toString()),
+                key: Key(todo!.id.toString()),
                 onDismissed: (direction) {
                   context.read<TodoListProvider>().changeSelectedTodo(todo);
                   context.read<TodoListProvider>().deleteTodo();

@@ -12,33 +12,54 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> emailKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> passKey = GlobalKey<FormState>();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
-    final email = TextField(
-      controller: emailController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'E-mail',
-      ),
-    );
+    final email = Form(
+        key: emailKey,
+        child: TextFormField(
+          controller: emailController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field cannot be empty!';
+            }
+            return null;
+          },
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'E-mail',
+          ),
+        ));
 
-    final password = TextField(
-      controller: passwordController,
-      obscureText: true,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Password',
-      ),
-    );
+    final password = Form(
+        key: passKey,
+        child: TextFormField(
+          controller: passwordController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field cannot be empty!';
+            }
+            return null;
+          },
+          obscureText: true,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Password',
+          ),
+        ));
 
     final loginButton = Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
         onPressed: () {
-          context
-              .read<AuthProvider>()
-              .signIn(emailController.text, passwordController.text);
+          if (emailKey.currentState!.validate() &
+              passKey.currentState!.validate()) {
+            context
+                .read<AuthProvider>()
+                .signIn(emailController.text, passwordController.text);
+          }
         },
         style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
