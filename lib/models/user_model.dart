@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 class User {
-  String? id;
-  String username;
-  String displayName;
+  String id;
+  String firstName;
+  String lastName;
+  String address;
+  String birthday;
+  String bio;
   List<String>? friends;
   List<String>? receivedFriendRequests;
   List<String>? sentFriendRequests;
@@ -11,17 +14,23 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
         id: json['id'],
-        username: json['username'],
-        displayName: json['displayName'],
+        firstName: json['firstname'],
+        lastName: json['lastname'],
         friends: json['friends'],
+        address: json['address'],
+        birthday: json['birthday'],
+        bio: json['bio'],
         receivedFriendRequests: json['receivedFriendRequests'],
         sentFriendRequests: json['sentFriendRequests']);
   }
 
   User(
-      {this.id,
-      required this.username,
-      required this.displayName,
+      {required this.id,
+      required this.firstName,
+      required this.lastName,
+      required this.address,
+      required this.birthday,
+      required this.bio,
       this.friends,
       this.receivedFriendRequests,
       this.sentFriendRequests});
@@ -34,8 +43,8 @@ class User {
   Map<String, dynamic> toJson(User user) {
     return {
       'id': user.id,
-      'username': user.username,
-      'displayName': user.displayName,
+      'firstname': user.firstName,
+      'lastname': user.lastName,
       'friends': user.friends,
       'receivedFriendRequests': user.receivedFriendRequests,
       'sentFriendRequests': user.sentFriendRequests

@@ -59,7 +59,6 @@ class TodoModal extends StatelessWidget {
         switch (type) {
           case 'Add':
             {
-              // Instantiate a todo objeect to be inserted, default userID will be 1, the id will be the next id in the list
               Todo temp = Todo(
                   userId: auth.currentUser!.uid,
                   completed: false,
@@ -67,7 +66,6 @@ class TodoModal extends StatelessWidget {
 
               context.read<TodoListProvider>().addTodo(temp);
 
-              // Remove dialog after adding
               Navigator.of(context).pop();
               break;
             }
@@ -103,8 +101,6 @@ class TodoModal extends StatelessWidget {
     return AlertDialog(
       title: _buildTitle(),
       content: _buildContent(context),
-
-      // Contains two buttons - add/edit/delete, and cancel
       actions: <Widget>[
         _dialogAction(context),
         TextButton(

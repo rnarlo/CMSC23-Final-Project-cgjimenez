@@ -1,3 +1,4 @@
+import 'package:cmsc23_project_cgjimenez/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cmsc23_project_cgjimenez/models/todo_model.dart';
@@ -29,7 +30,24 @@ class _TodoPageState extends State<TodoPage> {
           title: const Text('View Profile'),
           trailing: const Icon(Icons.person),
           onTap: () {
-            Navigator.pushNamed(context, '/profile');
+            Navigator.pushNamed(context, '/profile',
+                arguments: UserArgument(auth.currentUser!.uid));
+          },
+        ),
+        ListTile(
+          title: const Text('Manage Friends'),
+          trailing: const Icon(Icons.person_search_sharp),
+          onTap: () {
+            Navigator.pushNamed(context, '/friends',
+                arguments: UserArgument(auth.currentUser!.uid));
+          },
+        ),
+        ListTile(
+          title: const Text('Shared Todos'),
+          trailing: const Icon(Icons.note_sharp),
+          onTap: () {
+            Navigator.pushNamed(context, '/shared_todos',
+                arguments: UserArgument(auth.currentUser!.uid));
           },
         ),
         ListTile(
@@ -42,7 +60,7 @@ class _TodoPageState extends State<TodoPage> {
         ),
       ])),
       appBar: AppBar(
-        title: Text("Todo List"),
+        title: const Text("Personal Todo List"),
         backgroundColor: const Color.fromARGB(255, 67, 134, 221),
       ),
       body: StreamBuilder(
@@ -71,7 +89,7 @@ class _TodoPageState extends State<TodoPage> {
 
           if (_userTodos.isEmpty) {
             return const Center(
-              child: Text("No Todos Found"),
+              child: Text("Add your first Todo!"),
             );
           }
 

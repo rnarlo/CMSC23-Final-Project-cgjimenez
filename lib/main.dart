@@ -1,3 +1,4 @@
+import 'package:cmsc23_project_cgjimenez/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cmsc23_project_cgjimenez/providers/todo_provider.dart';
@@ -18,6 +19,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => TodoListProvider())),
+        ChangeNotifierProvider(create: ((context) => UserListProvider())),
         ChangeNotifierProvider(create: ((context) => AuthProvider())),
       ],
       child: MyApp(),
