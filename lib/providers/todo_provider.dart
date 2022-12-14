@@ -52,3 +52,53 @@ class TodoListProvider with ChangeNotifier {
     notifyListeners();
   }
 }
+
+class SharedTodoListProvider with ChangeNotifier {
+  late FirebaseTodoAPI firebaseService;
+  late Stream<QuerySnapshot> _sharedTodosStream;
+  Todo? _selectedTodo;
+
+  SharedTodoListProvider() {
+    firebaseService = FirebaseTodoAPI();
+    fetchTodos();
+  }
+
+  // getter
+  Stream<QuerySnapshot> get todos => _sharedTodosStream;
+  Todo get selected => _selectedTodo!;
+
+  changeSelectedTodo(Todo item) {
+    _selectedTodo = item;
+  }
+
+  void fetchTodos() {
+    _sharedTodosStream = firebaseService.getAllTodos();
+    notifyListeners();
+  }
+
+  void addTodo(Todo item) async {
+    String message = await firebaseService.addTodo(item.toJson(item));
+    print(message);
+    notifyListeners();
+  }
+
+  void editTodo(String newTitle) async {
+    String message =
+        await firebaseService.editTodo(_selectedTodo!.id, newTitle);
+    print(message);
+    notifyListeners();
+  }
+
+  void deleteTodo() async {
+    String message = await firebaseService.deleteTodo(_selectedTodo!.id);
+    print(message);
+    notifyListeners();
+  }
+
+  void toggleStatus(bool status) async {
+    String message =
+        await firebaseService.toggleStatus(_selectedTodo!.id, status);
+    print(message);
+    notifyListeners();
+  }
+}

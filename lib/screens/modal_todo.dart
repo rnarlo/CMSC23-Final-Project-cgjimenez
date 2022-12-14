@@ -13,6 +13,7 @@ class TodoModal extends StatelessWidget {
     super.key,
     required this.type,
   });
+  DateTime now = DateTime.now();
 
   // Method to show the title of the modal depending on the functionality
   Text _buildTitle() {
@@ -30,9 +31,6 @@ class TodoModal extends StatelessWidget {
 
   // Method to build the content or body depending on the functionality
   Widget _buildContent(BuildContext context) {
-    // Use context.read to get the last updated list of todos
-    // List<Todo> todoItems = context.read<TodoListProvider>().todo;
-
     switch (type) {
       case 'Delete':
         {
@@ -62,7 +60,8 @@ class TodoModal extends StatelessWidget {
               Todo temp = Todo(
                   userId: auth.currentUser!.uid,
                   completed: false,
-                  title: _formFieldController.text);
+                  title: _formFieldController.text,
+                  sharedWith: []);
 
               context.read<TodoListProvider>().addTodo(temp);
 
@@ -71,11 +70,9 @@ class TodoModal extends StatelessWidget {
             }
           case 'Edit':
             {
-              context
-                  .read<TodoListProvider>()
-                  .editTodo(_formFieldController.text);
+              context.read<TodoListProvider>().editTodo(
+                  "${_formFieldController.text} (Edited ${now.toString()})");
 
-              // Remove dialog after editing
               Navigator.of(context).pop();
               break;
             }

@@ -1,7 +1,10 @@
-2022/12/14-07:39:00.263 3e03 Reusing MANIFEST /private/var/folders/ht/p_tysrd9213441j81tdgn1tm0000gn/T/flutter_tools.wCsGgQ/flutter_tools_chrome_device.xwJVxP/Default/Session Storage/MANIFEST-000001
-2022/12/14-07:39:00.270 3e03 Recovering log #13
-2022/12/14-07:39:00.271 3e03 Reusing old log /private/var/folders/ht/p_tysrd9213441j81tdgn1tm0000gn/T/flutter_tools.wCsGgQ/flutter_tools_chrome_device.xwJVxP/Default/Session Storage/000013.log 
-2022/12/14-07:39:00.273 3e03 Delete type=0 #7
-2022/12/14-07:39:00.273 3e03 Delete type=0 #4
-2022/12/14-07:39:00.273 3e03 Delete type=0 #10
-2022/12/14-07:39:00.273 3e03 Delete type=0 #3
+2022/12/14-11:04:20.676 2f03 Reusing MANIFEST /private/var/folders/ht/p_tysrd9213441j81tdgn1tm0000gn/T/flutter_tools.2hJyie/flutter_tools_chrome_device.UqTw4m/Default/Session Storage/MANIFEST-000001
+2022/12/14-11:04:20.680 2f03 Recovering log #13
+2022/12/14-11:04:20.684 2f03 Reusing old log /private/var/folders/ht/p_tysrd9213441j81tdgn1tm0000gn/T/flutter_tools.2hJyie/flutter_tools_chrome_device.UqTw4m/Default/Session Storage/000013.log 
+2022/12/14-11:04:20.698 2f03 Delete type=0 #7
+2022/12/14-11:04:20.698 2f03 Delete type=0 #4
+2022/12/14-11:04:20.698 2f03 Delete type=0 #10
+2022/12/14-11:04:20.698 2f03 Delete type=0 #3
+2022/12/14-13:54:56.541 3137 Level-0 table #17: started
+2022/12/14-13:54:56.563 3137 Level-0 table #17: 18674 bytes OK
+2022/12/14-13:54:56.605 3137 Delete type=0 #13

@@ -5,12 +5,14 @@ class Todo {
   String? id;
   String title;
   bool completed;
+  List<dynamic> sharedWith;
 
   Todo({
     required this.userId,
     this.id,
     required this.title,
     required this.completed,
+    required this.sharedWith,
   });
 
   // Factory constructor to instantiate object from json format
@@ -20,6 +22,7 @@ class Todo {
       id: json['id'],
       title: json['title'],
       completed: json['completed'],
+      sharedWith: json['sharedWith'],
     );
   }
 
@@ -33,6 +36,7 @@ class Todo {
       'userId': todo.userId,
       'title': todo.title,
       'completed': todo.completed,
+      'sharedWith': todo.sharedWith,
     };
   }
 }

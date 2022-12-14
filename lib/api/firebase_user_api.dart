@@ -37,6 +37,24 @@ class FirebaseUserAPI {
         'friends': FieldValue.arrayUnion([id2])
       });
 
+      var allTodos = db.collection('todos');
+      var querySnapshots = await allTodos.get();
+      for (var todo in querySnapshots.docs) {
+        if (todo.id == id) {
+          await todo.reference.update({
+            'sharedWith': FieldValue.arrayUnion([id2]),
+          });
+        }
+      }
+
+      for (var todo in querySnapshots.docs) {
+        if (todo.id == id2) {
+          await todo.reference.update({
+            'sharedWith': FieldValue.arrayUnion([id]),
+          });
+        }
+      }
+
       await db.collection("users").doc(id2).update({
         'sentFriendRequests': FieldValue.arrayRemove([id])
       });

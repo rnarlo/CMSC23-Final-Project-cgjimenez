@@ -1,6 +1,7 @@
 import 'package:cmsc23_project_cgjimenez/providers/user_provider.dart';
 import 'package:cmsc23_project_cgjimenez/screens/friends_page.dart';
 import 'package:cmsc23_project_cgjimenez/screens/other_profile.dart';
+import 'package:cmsc23_project_cgjimenez/screens/shared_todo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cmsc23_project_cgjimenez/providers/todo_provider.dart';
@@ -21,6 +22,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => TodoListProvider())),
+        ChangeNotifierProvider(create: ((context) => SharedTodoListProvider())),
         ChangeNotifierProvider(create: ((context) => UserListProvider())),
         ChangeNotifierProvider(create: ((context) => FriendListProvider())),
         ChangeNotifierProvider(create: ((context) => AuthProvider())),
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const AuthWrapper(),
         '/profile': (context) => const ProfilePage(),
         '/friends': (context) => const FriendsPage(),
-        '/friend_profile': (context) => const FriendProfilePage()
+        '/friend_profile': (context) => const FriendProfilePage(),
+        '/shared_todos': (context) => const SharedTodoPage()
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
