@@ -1,10 +1,21 @@
-2022/12/12-21:32:09.262 3d03 Reusing MANIFEST /private/var/folders/ht/p_tysrd9213441j81tdgn1tm0000gn/T/flutter_tools.7pg1E3/flutter_tools_chrome_device.or2Zau/Default/Local Storage/leveldb/MANIFEST-000001
-2022/12/12-21:32:09.265 3d03 Recovering log #15
-2022/12/12-21:32:09.266 3d03 Reusing old log /private/var/folders/ht/p_tysrd9213441j81tdgn1tm0000gn/T/flutter_tools.7pg1E3/flutter_tools_chrome_device.or2Zau/Default/Local Storage/leveldb/000015.log 
-2022/12/12-21:32:09.269 3d03 Delete type=0 #6
-2022/12/12-21:32:09.269 3d03 Delete type=0 #4
-2022/12/12-21:32:09.269 3d03 Delete type=0 #11
-2022/12/12-21:32:09.269 3d03 Delete type=0 #3
-2022/12/12-21:32:09.269 3d03 Delete type=2 #3
-2022/12/12-21:32:09.269 3d03 Delete type=2 #7
-2022/12/12-21:32:09.269 3d03 Delete type=2 #5
+2022/12/14-07:38:59.747 3e03 Reusing MANIFEST /private/var/folders/ht/p_tysrd9213441j81tdgn1tm0000gn/T/flutter_tools.wCsGgQ/flutter_tools_chrome_device.xwJVxP/Default/Local Storage/leveldb/MANIFEST-000001
+2022/12/14-07:38:59.748 3e03 Recovering log #26
+2022/12/14-07:38:59.750 3e03 Reusing old log /private/var/folders/ht/p_tysrd9213441j81tdgn1tm0000gn/T/flutter_tools.wCsGgQ/flutter_tools_chrome_device.xwJVxP/Default/Local Storage/leveldb/000026.log 
+2022/12/14-07:38:59.751 3e03 Delete type=0 #6
+2022/12/14-07:38:59.751 3e03 Delete type=0 #4
+2022/12/14-07:38:59.751 3e03 Delete type=0 #11
+2022/12/14-07:38:59.751 3e03 Delete type=0 #15
+2022/12/14-07:38:59.751 3e03 Delete type=0 #3
+2022/12/14-07:38:59.751 3e03 Delete type=2 #16
+2022/12/14-07:38:59.751 3e03 Delete type=2 #3
+2022/12/14-07:38:59.751 3e03 Delete type=2 #7
+2022/12/14-07:38:59.751 3e03 Delete type=2 #13
+2022/12/14-07:38:59.751 3e03 Delete type=2 #5
+2022/12/14-07:38:59.751 3e03 Delete type=2 #19
+2022/12/14-07:38:59.751 3e03 Delete type=0 #18
+2022/12/14-07:39:15.703 3a03 Level-0 table #30: started
+2022/12/14-07:39:15.728 3a03 Level-0 table #30: 48450 bytes OK
+2022/12/14-07:39:15.769 3a03 Delete type=0 #26
+2022/12/14-07:57:34.164 3a07 Level-0 table #32: started
+2022/12/14-07:57:34.189 3a07 Level-0 table #32: 45872 bytes OK
+2022/12/14-07:57:34.232 3a07 Delete type=0 #29

@@ -7,9 +7,9 @@ class User {
   String address;
   String birthday;
   String bio;
-  List<String>? friends;
-  List<String>? receivedFriendRequests;
-  List<String>? sentFriendRequests;
+  List<dynamic> friends;
+  List<dynamic> receivedFriendRequests;
+  List<dynamic> sentFriendRequests;
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -31,9 +31,9 @@ class User {
       required this.address,
       required this.birthday,
       required this.bio,
-      this.friends,
-      this.receivedFriendRequests,
-      this.sentFriendRequests});
+      required this.friends,
+      required this.receivedFriendRequests,
+      required this.sentFriendRequests});
 
   static List<User> fromJsonArray(String jsonData) {
     final Iterable<dynamic> data = jsonDecode(jsonData);

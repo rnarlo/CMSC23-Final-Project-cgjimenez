@@ -17,7 +17,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  static final FirebaseFirestore db = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> userStream = context.watch<UserListProvider>().users;
